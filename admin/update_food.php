@@ -60,8 +60,37 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>category_id</td>
-                    <td><input type="text" name="title" value="<?php echo $category_id; ?>"></td>
+                    <td>category</td>
+                    <td>
+                        <select name="category">
+                            <?php $sql = "SELECT * FROM table_category WHERE active='yes'";
+
+                            $res = mysqli_query($conn, $sql);
+
+                            $count = mysqli_num_rows($res);
+                            if ($count > 0) {
+                                while ($row = mysqli_fetch_assoc($res)) {
+                                    $id = $row["id"];
+                                    $title = $row["title"];
+
+                                    ?>
+                                    <option value="<?php echo $id ?>">
+                                        <?php echo $title; ?>
+                                    </option>
+                                    <?php
+                                }
+                            } else {
+                                ?>
+                                <option value="0">No category found</option>
+                                <?php
+                            } ?>
+
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>New image</td>
+                    <td><input type="file" name="image"></td>
                 </tr>
                 <tr>
                     <td>Featured</td>
@@ -75,11 +104,6 @@
                         } ?> type="radio" name="featured"
                             value="no"><span>no</span>
                     </td>
-                </tr>
-
-                <tr>
-                    <td>New image</td>
-                    <td><input type="file" name="image"></td>
                 </tr>
                 <tr>
                     <td>active</td>
@@ -111,7 +135,7 @@
             $description = $_POST['description'];
             $price = $_POST['price'];
             $category_id = $_POST['category_id'];
-            $current_image = $_POST['image_name'];
+            $current_image = $_POST['current_image'];
             $featured = $_POST['featured'];
             $active = $_POST['active'];
 

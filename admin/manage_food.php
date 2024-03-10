@@ -33,9 +33,6 @@
             echo $_SESSION['delete'];
             unset($_SESSION['delete']);
         }
-
-        
-      
         ?>
         <a href="<?php echo SITEURL; ?>admin/add_food.php" class="btn_primary  admin">Add food</a>
         <div class="row flex ">
@@ -43,10 +40,8 @@
                 <tr>
                     <th>S.no</th>
                     <th>Title</th>
-                    <th>Description</th>
                     <th>Price</th>
-                    <th>Image_name</th>
-                    <th>Category_id</th>
+                    <th>Image</th>
                     <th>Featured</th>
                     <th>Active</th>
                     <th>Actions</th>
@@ -61,10 +56,8 @@
                     while ($row = mysqli_fetch_assoc($res)) {
                         $id = $row['id'];
                         $title = $row['title'];
-                        $description = $row['description'];
                         $price = $row['price'];
                         $image_name = $row['image_name'];
-                        $category_id = $row['category_id'];
                         $featured = $row['featured'];
                         $active = $row['active'];
                         ?>
@@ -75,9 +68,6 @@
                             </td>
                             <td>
                                 <?php echo $title; ?>
-                            </td>
-                            <td>
-                                <?php echo $description; ?>
                             </td>
                             <td>
                                 <?php echo $price; ?>
@@ -93,9 +83,6 @@
                                 ?>
                             </td>
                             <td>
-                                <?php echo $category_id; ?>
-                            </td>
-                            <td>
                                 <?php echo $featured; ?>
                             </td>
                             <td>
@@ -104,9 +91,9 @@
                             <td>
                                 <a href="<?php echo SITEURL; ?>admin/update_food.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>"
                                     class="btn_primary">Update admin</a>
-                                    <a href="<?php echo SITEURL; ?>admin/delete_food.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>"
+                                <a href="<?php echo SITEURL; ?>admin/delete_food.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>"
                                     class="btn_primary">Delete admin</a>
-                               
+
                             </td>
                         </tr>
 

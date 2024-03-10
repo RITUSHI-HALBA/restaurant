@@ -34,19 +34,6 @@
                     <td><input type="text" name="title" value="<?php echo $title; ?>"></td>
                 </tr>
                 <tr>
-                    <td>Featured</td>
-                    <td class="featured">
-                        <input <?php if ($featured == "yes") {
-                            echo "checked";
-                        } ?> type="radio" name="featured"
-                            value="yes"><span>yes</span>
-                        <input <?php if ($featured == "no") {
-                            echo "checked";
-                        } ?> type="radio" name="featured"
-                            value="no"><span>no</span>
-                    </td>
-                </tr>
-                <tr>
                     <td>Current image</td>
                     <td>
                         <?php
@@ -63,6 +50,19 @@
                 <tr>
                     <td>New image</td>
                     <td><input type="file" name="image"></td>
+                </tr>
+                <tr>
+                    <td>Featured</td>
+                    <td class="featured">
+                        <input <?php if ($featured == "yes") {
+                            echo "checked";
+                        } ?> type="radio" name="featured"
+                            value="yes"><span>yes</span>
+                        <input <?php if ($featured == "no") {
+                            echo "checked";
+                        } ?> type="radio" name="featured"
+                            value="no"><span>no</span>
+                    </td>
                 </tr>
                 <tr>
                     <td>active</td>
@@ -91,7 +91,7 @@
         if (isset($_POST['submit'])) {
             $id = $_POST['id'];
             $title = $_POST['title'];
-            $current_image = $_POST['image_name'];
+            $current_image = $_POST['current_image'];
             $featured = $_POST['featured'];
             $active = $_POST['active'];
 
