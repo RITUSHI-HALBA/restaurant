@@ -37,23 +37,33 @@ if (isset($_GET['category_id'])) {
 
         <?php
 
-        $sql2 = "SELECT * FROM table_food where id=$category_id";
+        $sql2 = "SELECT * FROM table_food WHERE category_id=$category_id";
 
         $res2 = mysqli_query($conn, $sql2);
 
         $count2 = mysqli_num_rows($res2);
 
         if ($count2 > 0) {
-            while ($row = mysqli_fetch_assoc($res)) {
-                $title = $row['title'];
-                $price = $row['price'];
-                $description = $row['description'];
-                $image_name = $row['image_name'];
+            while ($row2 = mysqli_fetch_assoc($res2)) {
+                $id= $row2['id'];
+                $title = $row2['title'];
+                $price = $row2['price'];
+                $description = $row2['description'];
+                $image_name = $row2['image_name'];
 
                 ?>
                 <div class="food-menu-box">
                     <div class="food-menu-img">
-                        <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name; ?>" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
+                        <?php
+                        if ($image_name != "") {
+                            ?>
+                            <img src="<?php echo SITEURL; ?>images/food/<?php echo $image_name ?>" alt="<?php echo $image_name ?>"
+                                class="img-responsive img-curve">
+                            <?php
+                        } else {
+                            echo "<div>There is no image available</div>";
+                        }
+                        ?>
                     </div>
 
                     <div class="food-menu-desc">
@@ -64,7 +74,7 @@ if (isset($_GET['category_id'])) {
                         </p>
                         <br>
 
-                        <a href="<?php SITEURL; ?>order.php" class="btn btn-primary">Order Now</a>
+                        <a href="<?php echo SITEURL; ?>order.php?food_id=<?php echo $id; ?>" class="btn btn-primary">Order Now</a>
                     </div>
                 </div>
 
@@ -72,6 +82,9 @@ if (isset($_GET['category_id'])) {
                 <?php
 
             }
+        }
+        else{
+            echo "<div class='error'>No food is available</div>";
         }
 
         ?>

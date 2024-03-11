@@ -199,6 +199,22 @@ fieldset{
     margin-bottom: 1%; 
     font-weight: bold;
 }
+.success{
+    color: green;
+}
+
+.error{
+    color: red;
+}
+.text-center {
+    text-align: center;
+}
+
+.head{
+    padding-top: 40px ;
+    font-weight: bold;
+    font-size: 20px;
+}
 
 
 

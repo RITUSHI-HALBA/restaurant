@@ -1,6 +1,6 @@
 <?php
 include("../config/constant.php");
-if (isset($_GET['id']) AND isset($_GET['image_name'])) {
+if (isset($_GET['id']) and isset($_GET['image_name'])) {
     $id = $_GET['id'];
     $image_name = $_GET['image_name'];
 
@@ -13,7 +13,7 @@ if (isset($_GET['id']) AND isset($_GET['image_name'])) {
             header('location:' . SITEURL . 'admin/manage_food.php');
             die();
         }
-    } 
+    }
 
     $sql = "DELETE FROM table_food WHERE id= $id";
 
@@ -28,6 +28,7 @@ if (isset($_GET['id']) AND isset($_GET['image_name'])) {
     }
 
 } else {
+    $_SESSION['unauthorized'] = "<div class='error'>Unauthorized Access</div>";
     header('location:' . SITEURL . 'admin/manage_food.php');
 }
 

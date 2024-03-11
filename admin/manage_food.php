@@ -13,6 +13,10 @@
             echo $_SESSION['upload'];
             unset($_SESSION['upload']);
         }
+        if (isset($_SESSION['unauthorized'])) {
+            echo $_SESSION['unauthorized'];
+            unset($_SESSION['unauthorized']);
+        }
         if (isset($_SESSION['failed-remove'])) {
             echo $_SESSION['failed-remove'];
             unset($_SESSION['failed-remove']);
@@ -89,7 +93,7 @@
                                 <?php echo $active; ?>
                             </td>
                             <td>
-                                <a href="<?php echo SITEURL; ?>admin/update_food.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>"
+                                <a href="<?php echo SITEURL; ?>admin/update_food.php?id=<?php echo $id; ?>"
                                     class="btn_primary">Update admin</a>
                                 <a href="<?php echo SITEURL; ?>admin/delete_food.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>"
                                     class="btn_primary">Delete admin</a>

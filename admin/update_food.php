@@ -1,36 +1,30 @@
 <?php include("partials/header.php") ?>
+<?php
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    $sql2 = "SELECT * FROM table_food WHERE id=$id";
+
+    $res2 = mysqli_query($conn, $sql2);
+
+    $row2 = mysqli_fetch_assoc($res2);
+    $title = $row2['title'];
+    $description = $row2['description'];
+    $price = $row2['price'];
+    $current_image = $row2['image_name'];
+    $current_category_id = $row2['category_id'];
+    $featured = $row2['featured'];
+    $active = $row2['active'];
+
+} else {
+    header('location:' . SITEURL . 'admin/manage_food.php');
+}
+?>
 <div class="main-content mx">
     <div class="wrapper px">
         <h1>UPDATE FOOD</h1>
         <br>
-        <?php
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
 
-            $sql = "SELECT * FROM table_food WHERE id=$id";
-
-            $res = mysqli_query($conn, $sql);
-
-            $count = mysqli_num_rows($res);
-
-            if ($count == 1) {
-                $row = mysqli_fetch_array($res);
-                $title = $row['title'];
-                $description = $row['description'];
-                $price = $row['price'];
-                $current_image = $row['image_name'];
-                $category_id = $row['category_id'];
-                $featured = $row['featured'];
-                $active = $row['active'];
-
-            } else {
-                $_SESSION['no_food_found'] = "<div class='error'>No food found</div>";
-                header('location:' . SITEURL . 'admin/manage_food.php');
-            }
-        } else {
-            header('location:' . SITEURL . 'admin/manage_food.php');
-        }
-        ?>
         <form action="" method="post" enctype="multipart/form-data">
             <table class="table_full  add_cat">
                 <tr>
@@ -39,11 +33,12 @@
                 </tr>
                 <tr>
                     <td>description</td>
-                    <td><input type="text" name="title" value="<?php echo $description; ?>"></td>
+                    <td><textarea name="description" cols="30" rows="5"><?php echo $description; ?></textarea>
+                    </td>
                 </tr>
                 <tr>
                     <td>price</td>
-                    <td><input type="text" name="title" value="<?php echo $price; ?>"></td>
+                    <td><input type="number" name="price" value="<?php echo $price; ?>"></td>
                 </tr>
                 <tr>
                     <td>Current image</td>
@@ -60,6 +55,10 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>New image</td>
+                    <td><input type="file" name="image"></td>
+                </tr>
+                <tr>
                     <td>category</td>
                     <td>
                         <select name="category">
@@ -70,11 +69,14 @@
                             $count = mysqli_num_rows($res);
                             if ($count > 0) {
                                 while ($row = mysqli_fetch_assoc($res)) {
-                                    $id = $row["id"];
+                                    $category_id = $row["id"];
                                     $title = $row["title"];
 
                                     ?>
-                                    <option value="<?php echo $id ?>">
+                                    <option <?php if ($current_category_id == $category_id) {
+                                        echo "selected";
+                                    } ?>
+                                        value="<?php echo $category_id ?>">
                                         <?php echo $title; ?>
                                     </option>
                                     <?php
@@ -88,10 +90,7 @@
                         </select>
                     </td>
                 </tr>
-                <tr>
-                    <td>New image</td>
-                    <td><input type="file" name="image"></td>
-                </tr>
+
                 <tr>
                     <td>Featured</td>
                     <td class="featured">
@@ -134,8 +133,8 @@
             $title = $_POST['title'];
             $description = $_POST['description'];
             $price = $_POST['price'];
-            $category_id = $_POST['category_id'];
             $current_image = $_POST['current_image'];
+            $category = $_POST['category'];
             $featured = $_POST['featured'];
             $active = $_POST['active'];
 
@@ -179,28 +178,31 @@
                 }
             }
 
-            $sql2 = "UPDATE table_food SET
+            $sql3 = "UPDATE table_food SET
             title = '$title',
             description = '$description',
             price = '$price',
-            category_id = '$category_id',
             image_name = '$image_name',
+            category_id = '$category',
             featured = '$featured',
             active = '$active'
-            
             WHERE id=$id";
 
-            $res2 = mysqli_query($conn, $sql2);
+            $res3 = mysqli_query($conn, $sql3);
 
-            if ($res2 == true) {
+            if ($res3 == true) {
                 $_SESSION['update'] = "<div class='success'>Food updated successfully</div>";
                 header('location:' . SITEURL . 'admin/manage_food.php');
             } else {
                 $_SESSION['update'] = "<div class='error'>Failed to updated</div>";
+                header_remove();
                 header('location:' . SITEURL . 'admin/manage_food.php');
             }
         }
+
         ?>
+      
+
     </div>
 </div>
 <?php include("partials/footer.php") ?>

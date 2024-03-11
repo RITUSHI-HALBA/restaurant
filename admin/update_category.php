@@ -147,6 +147,8 @@
 
             $res2 = mysqli_query($conn, $sql2);
 
+            print_r($res2);
+
             if ($res2 == true) {
                 $_SESSION['update'] = "<div class='success'>Category updated successfully</div>";
                 header('location:' . SITEURL . 'admin/manage_category.php');
