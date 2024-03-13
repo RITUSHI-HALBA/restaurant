@@ -142,6 +142,7 @@ width: 20px; margin-right: 10px;
 
 .featured,.active{display: flex;align-items: center;flex-wrap: wrap;}
 .featured span{margin-right: 15px;}
+.active span{margin-right: 15px;}
 
 textarea{padding: 10px;}
 input{padding: 10px;}

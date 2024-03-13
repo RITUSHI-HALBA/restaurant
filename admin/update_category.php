@@ -28,7 +28,7 @@
         }
         ?>
         <form action="" method="post" enctype="multipart/form-data">
-            <table class="table_full  add_cat">
+            <table class="table_full  add_cat radio_width">
                 <tr>
                     <td>Title</td>
                     <td><input type="text" name="title" value="<?php echo $title; ?>"></td>
